@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
-    return knex.schema.createSchema('tips', tbl => {
-        tbl.unique();
+    return knex.schema.createTable('tips', tbl => {
+        tbl.increments();
         tbl.integer('tippee_id')
             .unsigned()
             .references('id')

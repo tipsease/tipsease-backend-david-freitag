@@ -1,6 +1,6 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('tippers', tbl => {
-        tbl.unique();
+        tbl.increments();
         tbl.string('name').notNullable();
         tbl.integer('photourls_id')
             .references('id')

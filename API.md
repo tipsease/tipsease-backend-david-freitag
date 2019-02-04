@@ -222,6 +222,22 @@
 ]
 ```
 
+
+# Tipping endpoints
+
+## `POST /api/tippee/:id/tips`
+
+### injest
+
+```json
+[
+  {
+    "tipper_id": integer,
+    "amount": float 
+  }
+]
+```
+
 #### MVP:
 
 - [ ] roll our own authsystem
