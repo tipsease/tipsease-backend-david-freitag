@@ -1,5 +1,9 @@
 # Company endpoints
 
+## DB Schema
+
+![Schema Flowchart](/tipsease.png)
+
 ## `GET /api/tippers`
 
 ### returns
