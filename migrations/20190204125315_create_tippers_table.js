@@ -6,7 +6,8 @@ exports.up = function(knex, Promise) {
         tbl.integer('photourls_id')
             .references('id')
             .inTable('photourls')
-            .notNullable('');
+            .notNullable('')
+            .unique();
         tbl.integer('email')
             .unique()
             .notNullable();

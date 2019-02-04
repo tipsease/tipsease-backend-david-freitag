@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
         tbl.increments();
         tbl.string('first_name').notNullable();
         tbl.string('last_name').notNullable();
-        tbl.string('photo_url');
+        tbl.string('photourls_id');
         tbl.date('start_date').notNullable();
         tbl.string('email')
             .notNullable()
