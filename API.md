@@ -4,7 +4,9 @@
 
 ![Schema Flowchart](/tipsease.png)
 
-## `GET /api/tippers`
+# Company endpoints
+
+## `GET /api/companies`
 
 ### returns
 
