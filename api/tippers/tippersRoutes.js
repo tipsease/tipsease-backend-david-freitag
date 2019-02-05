@@ -8,7 +8,7 @@ router
     .get((req, res) => {
         tippers
             .getAll()
-            .then(async data => {
+            .then(data => {
                 res.status(200).json(data);
             })
             .catch(err => {
