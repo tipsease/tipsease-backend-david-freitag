@@ -60,6 +60,18 @@
 ]
 ```
 
+## `POST /api/tippers`
+
+### injests
+
+```json
+  [
+    {
+      "first_name": string
+    }
+  ]
+```
+
 ## `DELETE /api/tippers/:id`
 
 ### returns
