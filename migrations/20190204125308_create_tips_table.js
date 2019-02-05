@@ -4,12 +4,12 @@ exports.up = function(knex, Promise) {
         tbl.integer('tippee_id')
             .unsigned()
             .references('id')
-            .inTable('tippee')
+            .inTable('tippees')
             .notNullable('');
         tbl.integer('tipper_id')
             .unsigned()
             .references('id')
-            .inTable('tipper')
+            .inTable('tippers')
             .notNullable();
         tbl.float('amount');
         tbl.date('date');
