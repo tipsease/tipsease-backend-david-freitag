@@ -10,7 +10,7 @@ const compression = require('compression');
 const morgan = require('morgan');
 const _ = require('lodash');
 const tippersRoute = require('./tippers/tippersRoutes');
-const tippeesRoute = require('./tippees/tippesRoutes');
+const tippeesRoute = require('./tippees/tippeesRoutes');
 
 const server = express();
 server.use(express.json());
