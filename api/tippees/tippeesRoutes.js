@@ -45,11 +45,13 @@ router
                     tippees
                         .insert(data)
                         .then(id => {
-                            tippeees.getById(id[0]).then(data => {
+                            console.log(id[0]);
+                            tippees.getById(id[0]).then(data => {
                                 res.status(201).json(data);
                             });
                         })
                         .catch(err => {
+                            console.log(err);
                             res.status(500).json(err);
                         });
                 });
