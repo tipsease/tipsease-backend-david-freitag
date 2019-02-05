@@ -27,3 +27,7 @@ exports.getById = id => {
             'qr_url'
         );
 };
+
+exports.insert = data => {
+    return db('tippees').insert(data);
+};

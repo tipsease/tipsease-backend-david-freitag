@@ -47,7 +47,15 @@ router
         const { id } = req.params;
         tippers
             .getById(id)
-            .then(data => res.status(200).json(data))
+            .then(data => {
+                if (data === []) {
+                    res.status(404).json({
+                        errMessage: `Tipper ${id} does not exist.`,
+                    });
+                    return;
+                }
+                res.status(200).json(data);
+            })
             .catch(err => {
                 res.status(500).json(err);
             });
