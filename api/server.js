@@ -41,7 +41,6 @@ server.get('/api/tippers/:id', (req, res) => {
 });
 
 server.post('/api/tippers', imageParser.single('image'), (req, res) => {
-    const image = {};
     const data = req.body;
     if (req.file) {
         data.photo_url = req.file.url;
@@ -84,9 +83,14 @@ server.delete('/api/tippers/:id', (req, res) => {
         .catch(err => res.status(500).json(err));
 });
 
-server.put('/api/tippers/:id', (req, res) => {
+server.put('/api/tippers/:id', imageParser.single('image'), (req, res) => {
     const { id } = req.params;
+
     const data = req.body;
+    if (req.file) {
+        data.photo_url = req.file.url;
+        data.photo_public_id = req.file.public_id;
+    }
 
     tippers
         .update(id, data)
