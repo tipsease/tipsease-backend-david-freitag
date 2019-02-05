@@ -4,7 +4,6 @@ const { getQuote } = require('inspirational-quotes');
 const createFakeTippee = i => ({
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
-    photourls_id: i,
     start_date: faker.date.past(),
     email: faker.internet.email(),
     tagline: getQuote().text,

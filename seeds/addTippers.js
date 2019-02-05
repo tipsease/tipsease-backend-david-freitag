@@ -3,7 +3,6 @@ const faker = require('faker');
 const createFakeTipper = i => ({
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
-    photourls_id: i,
     email: faker.internet.email(),
     passwd: 'randomHash',
 });

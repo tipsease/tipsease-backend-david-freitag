@@ -5,16 +5,13 @@ const db = require('../db/dbConfig');
 // };
 
 exports.getAll = () => {
-    return db('tippers')
-        .select(
-            'tippers.id',
-            'tippers.first_name',
-            'tippers.last_name',
-            'tippers.email',
-            'photourls.photo_url as photo_url'
-        )
-        .from('photourls')
-        .join('tippers', 'photourls.id', 'tippers.photourls_id');
+    return db('tippers').select(
+        'tippers.id',
+        'tippers.first_name',
+        'tippers.last_name',
+        'tippers.email',
+        'tippers.photo_url'
+    );
 };
 
 exports.getById = id => {
@@ -25,18 +22,16 @@ exports.getById = id => {
             'tippers.first_name',
             'tippers.last_name',
             'tippers.email',
-            'photourls.photo_url as photo_url'
-        )
-        .from('photourls')
-        .join('tippers', 'photourls.id', 'tippers.photourls_id');
+            'tippers.photo_url'
+        );
 };
 
 exports.insert = data => {
+    return db('tippers').insert(data);
+};
+
+exports.remove = id => {
     return db('tippers')
-        .insert(data)
-        .then(([id]) => {
-            return db('tippers')
-                .where({ id })
-                .first();
-        });
+        .where('tippers.id', id)
+        .del();
 };
