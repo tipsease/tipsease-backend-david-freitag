@@ -1,9 +1,5 @@
 const db = require('../db/dbConfig');
 
-// exports.getAll = () => {
-//     return db('tippers');
-// };
-
 exports.getAll = () => {
     return db('tippers').select(
         'tippers.id',
@@ -34,4 +30,10 @@ exports.remove = id => {
     return db('tippers')
         .where('tippers.id', id)
         .del();
+};
+
+exports.update = (id, data) => {
+    return db('tippers')
+        .where('tippers.id', id)
+        .update(data);
 };
