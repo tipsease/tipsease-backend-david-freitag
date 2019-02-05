@@ -9,6 +9,7 @@ const createFakeTippee = i => ({
     tagline: getQuote().text,
     qr_url: 'random url',
     passwd: 'Some random hash',
+    qr_id: 'randomstuff',
 });
 
 exports.seed = async function(knex, Promise) {
