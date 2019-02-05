@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { tippees } = require('../../models');
 const imageParser = require('../../configs/cloudinary');
+const QRCode = require('qrcode');
+const cloudinary = require('cloudinary');
 
 router
     .route('/')
@@ -15,7 +17,7 @@ router
                 res.status(500).json(err);
             });
     })
-    .post(imageParser.single('image'), (req, res) => {
+    .post(imageParser.single('image'), async (req, res) => {
         const data = req.body;
         if (req.file) {
             data.photo_url = req.file.url;
@@ -33,20 +35,26 @@ router
                     'first_name, last_name, start_date, and tagline are required.',
             });
         }
-
         data.passwd = 'randomstuff';
 
-        tippees
-            .insert(data)
-            .then(id => {
-                tippers.getById(id[0]).then(data => {
-                    res.status(201).json(data);
+        QRCode.toDataURL(`We need to figure out what to do with this.`).then(
+            (url, err) => {
+                cloudinary.v2.uploader.upload(url, function(err, cloud) {
+                    data.qr_url = cloud.url;
+                    data.qr_id = cloud.public_id;
+                    tippees
+                        .insert(data)
+                        .then(id => {
+                            tippeees.getById(id[0]).then(data => {
+                                res.status(201).json(data);
+                            });
+                        })
+                        .catch(err => {
+                            res.status(500).json(err);
+                        });
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
+            }
+        );
     });
 
 router.route('/:id').get((req, res) => {

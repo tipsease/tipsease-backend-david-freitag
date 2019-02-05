@@ -16,6 +16,7 @@ exports.up = function(knex, Promise) {
         tbl.string('tagline');
         tbl.string('passwd').notNullable();
         tbl.string('qr_url').notNullable();
+        tbl.string('qr_id').notNullable();
     });
 };
 
