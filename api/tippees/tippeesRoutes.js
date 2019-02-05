@@ -51,7 +51,13 @@ router
                             });
                         })
                         .catch(err => {
-                            console.log(err);
+                            if (err.errno === 19) {
+                                res.status(400).json({
+                                    errMessage: 'Emails must be unique.',
+                                    errCode: 1,
+                                });
+                                return;
+                            }
                             res.status(500).json(err);
                         });
                 });
