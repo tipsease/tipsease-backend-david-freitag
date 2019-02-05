@@ -30,15 +30,17 @@
 [
   {
     "id": integer,
-    "name": string,
+    "first_name": string,
+    "last_name": string,
+    "email": string,
     "photo_url": string,
-    "email": string
   },
   {
     "id": integer,
-    "name": string,
+    "first_name": string,
+    "last_name": string,
+    "email": string,
     "photo_url": string,
-    "email": string
   }
 ]
 ```
