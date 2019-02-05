@@ -88,19 +88,21 @@ server.put('/api/tippers/:id', (req, res) => {
     const { id } = req.params;
     const data = req.body;
 
-    tippers.update(id, data).then(data => {
-        if (data === 0) {
-            res.status(404).json({
-                errMessage: `Tipper ${id} does not exist.`,
-            });
-            return;
-        }
-        tippers.getById(id).then(data => res.status(200).json(data));
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).
-    })
+    tippers
+        .update(id, data)
+        .then(data => {
+            if (data === 0) {
+                res.status(404).json({
+                    errMessage: `Tipper ${id} does not exist.`,
+                });
+                return;
+            }
+            tippers.getById(id).then(data => res.status(200).json(data));
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
 module.exports = server;
