@@ -43,9 +43,10 @@ server.get('/api/tippers/:id', (req, res) => {
 server.post('/api/tippers', imageParser.single('image'), (req, res) => {
     const image = {};
     const data = req.body;
-    data.photo_url = req.file.url;
-    data.photo_public_id = req.file.public_id;
-    console.log(data);
+    if (req.file) {
+        data.photo_url = req.file.url;
+        data.photo_public_id = req.file.public_id;
+    }
     if (!data.first_name || !data.last_name || !data.email) {
         res.status(400).json({
             errMessage: 'first_name, last_name, and email required.',
@@ -54,11 +55,11 @@ server.post('/api/tippers', imageParser.single('image'), (req, res) => {
     }
     tippers
         .insert(data)
-        .then(data =>
-            tippers.getById(data).then(data => {
+        .then(id => {
+            tippers.getById(id[0]).then(data => {
                 res.status(201).json(data);
-            })
-        )
+            });
+        })
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
@@ -69,14 +70,33 @@ server.delete('/api/tippers/:id', (req, res) => {
     const { id } = req.params;
     tippers
         .remove(id)
-        .then(data =>
-            res
-                .status(200)
-                .json({ message: `User ${id} was removed from the database.` })
-        )
-        .catch(err => res.status(400).json(err));
+        .then(data => {
+            if (data === 0) {
+                res.status(404).json({
+                    errMessage: `Tipper ${id} does not exist`,
+                });
+                return;
+            }
+            res.status(200).json({
+                message: `Tipper ${id} was removed from the database.`,
+            });
+        })
+        .catch(err => res.status(500).json(err));
 });
 
-server.put('/api/tippers/:id', (req, res) => {});
+server.put('/api/tippers/:id', (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+
+    tippers.update(id, data).then(data => {
+        if (data === 0) {
+            res.status(404).json({
+                errMessage: `Tipper ${id} does not exist.`,
+            });
+            return;
+        }
+        tippers.getById(id).then(data => res.status(200).json(data));
+    });
+});
 
 module.exports = server;
