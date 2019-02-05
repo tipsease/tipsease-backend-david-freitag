@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
             .notNullable()
             .unique();
         tbl.string('tagline');
-        tbl.string('hash').notNullable();
+        tbl.string('passwd').notNullable();
         tbl.string('qr_url').notNullable();
     });
 };

@@ -13,6 +13,7 @@ dependencies:
 devDependencies:
   cross-env: 5.2.0
   faker: 4.1.0
+  inspirational-quotes: 1.0.5
   jest: 24.0.0
   nodemon: 1.18.9
   supertest: 3.4.2
@@ -3137,6 +3138,10 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-Z2rREiXA6cHRR9KBOarR3WuLlFzlIfAEIiB45ll5SSadMg7WqOh1MKEjjndfuH5ewXdixWCxqnVfGOQzPeiztA==
+  /inspirational-quotes/1.0.5:
+    dev: true
+    resolution:
+      integrity: sha512-ULY7iwVmaVpHCJR3r84pxZxtsathB7jFLMkoInS5p4S7l9tnvgj0EmmQZ8vFul2+F9DZHFHlYYlmM9UZ/58bEw==
   /interpret/1.2.0:
     dev: false
     engines:
@@ -6953,6 +6958,7 @@ specifiers:
   faker: ^4.1.0
   helmet: ^3.15.0
   heroku: ^7.19.4
+  inspirational-quotes: ^1.0.5
   jest: ^24.0.0
   jsonwebtoken: ^8.4.0
   knex: ^0.16.3

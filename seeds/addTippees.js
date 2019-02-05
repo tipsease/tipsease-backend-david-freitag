@@ -1,0 +1,26 @@
+const faker = require('faker');
+const { getQuote } = require('inspirational-quotes');
+
+const createFakeTippee = i => ({
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName(),
+    photourls_id: i,
+    start_date: faker.date.past(),
+    email: faker.internet.email(),
+    tagline: getQuote().text,
+    qr_url: 'random url',
+    passwd: 'Some random hash',
+});
+
+exports.seed = async function(knex, Promise) {
+    await knex('tippees').truncate();
+
+    const fakeTippees = [];
+    const desiredFakeTippees = 100;
+
+    for (let i = 0; i < desiredFakeTippees; i++) {
+        fakeTippees.push(createFakeTippee(i));
+    }
+
+    await knex('tippees').insert(fakeTippees);
+};
