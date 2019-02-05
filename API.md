@@ -45,7 +45,7 @@
 ]
 ```
 
-## `GET /api/tipper/:id`
+## `GET /api/tippers/:id`
 
 ### returns
 
@@ -60,7 +60,7 @@
 ]
 ```
 
-## `DELETE /api/tipper/:id`
+## `DELETE /api/tippers/:id`
 
 ### returns
 

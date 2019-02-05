@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { tippers, photoUrls } = require('../models');
+const { tippers } = require('../models');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -41,7 +41,10 @@ server.get('/api/tippers/:id', (req, res) => {
 });
 
 server.post('/api/tippers', imageParser.single('image'), (req, res) => {
+    const image = {};
     const data = req.body;
+    data.photo_url = req.file.url;
+    data.photo_public_id = req.file.public_id;
     console.log(data);
     if (!data.first_name || !data.last_name || !data.email) {
         res.status(400).json({
