@@ -123,14 +123,39 @@ router
             });
     });
 
-router.route('/:id/tips').get((req, res) => {
-    const { id } = req.params;
+router
+    .route('/:id/tips')
+    .get((req, res) => {
+        const { id } = req.params;
 
-    tips.getAll(id)
-        .then(data => {
-            res.status(200).json(data);
-        })
-        .catch(err => res.status(200).json(err));
-});
+        tips.getAll(id)
+            .then(data => {
+                res.status(200).json(data);
+            })
+            .catch(err => res.status(200).json(err));
+    })
+    .post((req, res) => {
+        const { id } = req.params;
+        const data = req.body;
+
+        if (!data.tipper_id || !data.amount || !data.date) {
+            res.status(400).json({
+                errMessage: 'tipper_id, amount, and date are required',
+            });
+        }
+
+        data.tippee_id = id;
+
+        tips.insert(data)
+            .then(id => {
+                tips.getById(id[0]).then(data => {
+                    res.status(201).json(data);
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    });
 
 module.exports = router;

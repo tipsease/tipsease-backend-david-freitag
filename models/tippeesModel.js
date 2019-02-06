@@ -17,7 +17,6 @@ exports.getById = id => {
     return db('tippees')
         .where('id', id)
         .select(
-            'id',
             'first_name',
             'last_name',
             'photo_url',
