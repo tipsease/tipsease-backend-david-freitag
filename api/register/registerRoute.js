@@ -2,7 +2,12 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const { genToken } = require('../../middleware/auth');
 const imageParser = require('../../configs/cloudinary');
-const { tippers, tippees, companies } = require('../../models');
+const {
+    tippers,
+    tippees,
+    companies,
+    companiesTippees,
+} = require('../../models');
 const QRCode = require('qrcode');
 const cloudinary = require('cloudinary');
 
@@ -73,15 +78,42 @@ router.route('/').post(imageParser.single('image'), async (req, res) => {
 
         const qrCode = await genQr(qrCodeImg);
         data = { ...data, ...qrCode };
+        insertTippee = async () => {
+            try {
+                const { company_name, ...inputData } = data;
+                const tippeeId = await tippees.insert(inputData);
+                const tippee = await tippees.getById(tippeeId[0]);
+                const token = genToken(tippee);
+                tippee[0].token = token;
+                // res.status(201).json(tippee);
+                return { company_name, tippeeId, tippee };
+            } catch (err) {
+                res.status(500).json(err);
+            }
+        };
+
+        const { company_name, tippeeId, tippee } = await insertTippee();
 
         try {
-            const { company_name, ...inputData } = data;
-            const tippeeId = await tippees.insert(inputData);
-            const tippee = await tippees.getById(tippeeId[0]);
-            const token = genToken(tippee);
-            tippee[0].token = token;
-            res.status(201).json(tippee);
+            const company = await companies.getByName(company_name);
+            if (company.length === 0) {
+                const createdCompanyId = await companies.insert({
+                    name: company_name,
+                });
+                await companiesTippees.insert({
+                    company_id: createdCompanyId[0],
+                    tippees_id: tippeeId[0],
+                });
+                res.status(201).json(tippee);
+            } else {
+                await companiesTippees.insert({
+                    company_id: company[0].id,
+                    tippees_id: tippeeId[0],
+                });
+                res.status(201).json(tippee);
+            }
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     }
