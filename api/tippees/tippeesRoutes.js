@@ -65,21 +65,40 @@ router
         );
     });
 
-router.route('/:id').get((req, res) => {
-    const { id } = req.params;
-    tippees
-        .getById(id)
-        .then(data => {
-            if (data === []) {
-                res.status(404).json({
-                    errMessage: `Tippee ${id} does not exist.`,
+router
+    .route('/:id')
+    .get((req, res) => {
+        const { id } = req.params;
+        tippees
+            .getById(id)
+            .then(data => {
+                if (data === []) {
+                    res.status(404).json({
+                        errMessage: `Tippee ${id} does not exist.`,
+                    });
+                }
+                res.status(200).json(data);
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            });
+    })
+    .delete((req, res) => {
+        const { id } = req.params;
+        tippees
+            .remove(id)
+            .then(data => {
+                if (data === 0) {
+                    res.status(404).json({
+                        errMessage: `Tippee ${id} does not exist`,
+                    });
+                    return;
+                }
+                res.status(200).json({
+                    message: `Tippee ${id} was removed from the database`,
                 });
-            }
-            res.status(200).json(data);
-        })
-        .catch(err => {
-            res.status(500).json(err);
-        });
-});
+            })
+            .catch(err => res.status(500).json(err));
+    });
 
 module.exports = router;

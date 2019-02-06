@@ -31,3 +31,9 @@ exports.getById = id => {
 exports.insert = data => {
     return db('tippees').insert(data);
 };
+
+exports.remove = id => {
+    return db('tippers')
+        .where('tippers.id', id)
+        .del();
+};
