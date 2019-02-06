@@ -99,6 +99,31 @@ router
                 });
             })
             .catch(err => res.status(500).json(err));
+    })
+    .put(imageParser.single('image'), (req, res) => {
+        const { id } = req.params;
+        const data = req.body;
+
+        if (req.file) {
+            data.photo_url = req.file.url;
+            data.photo_public_id = req.file.public_id;
+        }
+
+        tippees
+            .update(id, data)
+            .then(data => {
+                if (data === 0) {
+                    res.status(404).json({
+                        errMessage: `Tipper ${id} does not exist.`,
+                    });
+                    return;
+                }
+                tippees.getById(id).then(data => res.status(200).json(data));
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
     });
 
 module.exports = router;

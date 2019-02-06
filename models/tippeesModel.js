@@ -37,3 +37,9 @@ exports.remove = id => {
         .where('tippers.id', id)
         .del();
 };
+
+exports.update = (id, data) => {
+    return db('tippees')
+        .where('tippees.id', id)
+        .update(data);
+};
