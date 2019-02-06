@@ -6,7 +6,6 @@ const helmet = require('helmet');
 const knex = require('knex');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const compression = require('compression');
 const morgan = require('morgan');
 const _ = require('lodash');
 const tippersRoute = require('./tippers/tippersRoutes');
@@ -14,7 +13,6 @@ const tippeesRoute = require('./tippees/tippeesRoutes');
 
 const server = express();
 server.use(express.json());
-server.use(compression());
 server.use(helmet());
 server.use(morgan());
 

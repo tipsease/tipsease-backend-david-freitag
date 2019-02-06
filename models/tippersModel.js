@@ -33,6 +33,8 @@ exports.remove = id => {
 };
 
 exports.update = (id, data) => {
+    console.log(id);
+    console.log(data);
     return db('tippers')
         .where('tippers.id', id)
         .update(data);
