@@ -1,21 +1,18 @@
 const router = require('express').Router();
-const { tippees } = require('../../models');
+const { tippees, tips } = require('../../models');
 const imageParser = require('../../configs/cloudinary');
 const QRCode = require('qrcode');
 const cloudinary = require('cloudinary');
 
 router
     .route('/')
-    .get((req, res) => {
-        tippees
-            .getAll()
-            .then(data => {
-                res.status(200).json(data);
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json(err);
-            });
+    .get(async (req, res) => {
+        try {
+            const data = await tippees.getAll();
+            res.status(200).json(data);
+        } catch (err) {
+            res.status(500).json(err);
+        }
     })
     .post(imageParser.single('image'), async (req, res) => {
         const data = req.body;
@@ -125,5 +122,15 @@ router
                 res.status(500).json(err);
             });
     });
+
+router.route('/:id/tips').get((req, res) => {
+    const { id } = req.params;
+
+    tips.getAll(id)
+        .then(data => {
+            res.status(200).json(data);
+        })
+        .catch(err => res.status(200).json(err));
+});
 
 module.exports = router;
