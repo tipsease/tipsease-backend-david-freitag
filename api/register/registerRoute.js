@@ -39,7 +39,7 @@ router.route('/').post(imageParser.single('image'), async (req, res) => {
             })
             .catch(res.status(500).json(err));
     } else {
-        if ((!data.start_date, !data.tagline)) {
+        if ((!data.start_date, !data.tagline, !data.company_id)) {
             res.status(400).json({
                 errMessage: `first_name, last_name, email, password, start_date, tagline, and tipperBoolean are required`,
             });
