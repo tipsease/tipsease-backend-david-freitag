@@ -33,7 +33,6 @@ router
             });
         }
         data.passwd = 'randomstuff';
-
         QRCode.toDataURL(`We need to figure out what to do with this.`).then(
             (url, err) => {
                 cloudinary.v2.uploader.upload(url, function(err, cloud) {

@@ -10,6 +10,10 @@ exports.getAll = () => {
     );
 };
 
+exports.getAllInternal = () => {
+    return db('tippers');
+};
+
 exports.getById = id => {
     return db('tippers')
         .where('tippers.id', id)

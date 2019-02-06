@@ -13,6 +13,10 @@ exports.getAll = () => {
     );
 };
 
+exports.getAllInternal = () => {
+    return db('tippees');
+};
+
 exports.getById = id => {
     return db('tippees')
         .where('id', id)

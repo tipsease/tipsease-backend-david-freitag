@@ -26,7 +26,6 @@ const authenticate = (req, res, next) => {
                 });
             } else {
                 req.decoded = decoded;
-
                 next();
             }
         });
