@@ -158,4 +158,10 @@ router
             });
     });
 
+router.route('/:tippee_id/tips/:tip_id').get((req, res) => {
+    const { tippee_id, tip_id } = req.params;
+
+    tips.getById(tip_id).then(data => res.status(200).json(data));
+});
+
 module.exports = router;
