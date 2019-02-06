@@ -15,6 +15,7 @@ const registerRoute = require('./register/registerRoute');
 const server = express();
 server.use(express.json());
 server.use(helmet());
+server.use(cors());
 server.use(morgan());
 
 server.use('/api/tippers', tippersRoute);
