@@ -12,7 +12,7 @@ exports.up = function(knex, Promise) {
         tbl.string('email')
             .unique()
             .notNullable();
-        tbl.string('passwd');
+        tbl.string('password');
     });
 };
 

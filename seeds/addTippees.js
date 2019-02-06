@@ -8,7 +8,7 @@ const createFakeTippee = i => ({
     email: faker.internet.email(),
     tagline: getQuote().text,
     qr_url: 'random url',
-    passwd: 'Some random hash',
+    password: 'Some random hash',
     qr_id: 'randomstuff',
 });
 
@@ -21,6 +21,16 @@ exports.seed = async function(knex, Promise) {
     for (let i = 0; i < desiredFakeTippees; i++) {
         fakeTippees.push(createFakeTippee(i));
     }
+
+    // fakeTippees.push({
+    //     first_name: 'Testy',
+    //     last_name: 'McTesterson',
+    //     start_date: faker.date.past(),
+    //     email: 'testy@test.com',
+    //     tagline: getQuote().text,
+    //     qr_url: 'random url',
+    //     passwd: '',
+    // });
 
     await knex('tippees').insert(fakeTippees);
 };

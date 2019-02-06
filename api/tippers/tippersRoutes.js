@@ -1,6 +1,5 @@
-const express = require('express');
 const { tippers } = require('../../models');
-const router = express.Router();
+const router = require('express').Router();
 const imageParser = require('../../configs/cloudinary');
 
 router

@@ -4,7 +4,7 @@ const createFakeTipper = i => ({
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
     email: faker.internet.email(),
-    passwd: 'randomHash',
+    password: 'randomHash',
 });
 
 exports.seed = async function(knex, Promise) {

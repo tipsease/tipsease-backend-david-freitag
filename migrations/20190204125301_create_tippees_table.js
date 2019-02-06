@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
             .notNullable()
             .unique();
         tbl.string('tagline');
-        tbl.string('passwd').notNullable();
+        tbl.string('password').notNullable();
         tbl.string('qr_url').notNullable();
         tbl.string('qr_id').notNullable();
     });
