@@ -128,11 +128,6 @@ router.route('/:id/tips').get((req, res) => {
 
     tips.getAll(id)
         .then(data => {
-            if (data === []) {
-                res.status(404).json({
-                    errMessage: `Tippee ${id} does not exist.`,
-                });
-            }
             res.status(200).json(data);
         })
         .catch(err => res.status(200).json(err));
