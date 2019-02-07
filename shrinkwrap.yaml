@@ -2,7 +2,6 @@ dependencies:
   bcrypt: 3.0.3
   bcryptjs: 2.4.3
   cloudinary: 1.13.2
-  compression: 1.7.3
   cors: 2.8.5
   dotenv: 6.2.0
   express: 4.16.4
@@ -17,6 +16,7 @@ dependencies:
   pg: 7.8.0
   qrcode: 1.3.3
   sqlite3: 4.0.6
+  validatorjs: 3.15.1
 devDependencies:
   cross-env: 5.2.0
   faker: 4.1.0
@@ -1638,28 +1638,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-ZF/ErfWLcrZJ1crmUTVhnbJv8UM=
-  /compressible/2.0.15:
-    dependencies:
-      mime-db: 1.37.0
-    dev: false
-    engines:
-      node: '>= 0.6'
-    resolution:
-      integrity: sha512-4aE67DL33dSW9gw4CI2H/yTxqHLNcxp0yS6jB+4h+wr3e43+1z7vm0HU9qXOH8j+qjKuL8+UtkOxYQSMq60Ylw==
-  /compression/1.7.3:
-    dependencies:
-      accepts: 1.3.5
-      bytes: 3.0.0
-      compressible: 2.0.15
-      debug: 2.6.9
-      on-headers: 1.0.1
-      safe-buffer: 5.1.2
-      vary: 1.1.2
-    dev: false
-    engines:
-      node: '>= 0.8.0'
-    resolution:
-      integrity: sha512-HSjyBG5N1Nnz7tF2+O7A9XUhyjru71/fwgNb7oIsEVHR0WShfs2tIS/EySLgiTe98aOK18YDlMXpzjCXY/n9mg==
   /concat-map/0.0.1:
     resolution:
       integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
@@ -6866,6 +6844,10 @@ packages:
       node: '>= 0.10'
     resolution:
       integrity: sha512-X/p3UZerAIsbBfN/IwahhYaBbY68EN/UQBWHtsbXGT5bfrH/p4NQzUCG1kF/rtKaNpnJ7jAu6NGTdSNtyNIXMw==
+  /validatorjs/3.15.1:
+    dev: false
+    resolution:
+      integrity: sha512-9hJWC4sYaEjf3a6MPKrERzRU69btS/pDy+t5IX8pRFqkI8UI2qj8nR3n2XlVzxRZMQGrf6HrtfDkoRcJavkLlg==
   /vary/1.1.2:
     dev: false
     engines:
@@ -7098,7 +7080,6 @@ specifiers:
   bcrypt: ^3.0.3
   bcryptjs: ^2.4.3
   cloudinary: ^1.13.2
-  compression: ^1.7.3
   cors: ^2.8.5
   cross-env: ^5.2.0
   dotenv: ^6.2.0
@@ -7119,3 +7100,4 @@ specifiers:
   qrcode: ^1.3.3
   sqlite3: ^4.0.6
   supertest: ^3.4.2
+  validatorjs: ^3.15.1

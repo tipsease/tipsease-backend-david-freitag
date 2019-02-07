@@ -2,6 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const { genToken } = require('../../middleware/auth');
 const imageParser = require('../../configs/cloudinary');
+const { userValidator } = require('../../definitions/definitions');
 const {
     tippers,
     tippees,
@@ -12,19 +13,17 @@ const QRCode = require('qrcode');
 const cloudinary = require('cloudinary');
 
 router.route('/').post(imageParser.single('image'), async (req, res) => {
+    const user = userValidator(req.body);
+    if (!user.isValid) {
+        res.status(400).json({ errMessage: user.err });
+        return;
+    }
+
     let { tipperBoolean, ...data } = req.body;
     const image = {};
     const hash = bcrypt.hashSync(data.password, 8);
 
     data.password = hash;
-
-    if (!data.first_name || !data.last_name || !data.email || !data.password) {
-        res.status(400).json({
-            errMessage:
-                'first_name, last_name, email, password, and tipperBoolean are required for both tipper and tippee',
-        });
-        return;
-    }
 
     if (req.file) {
         data.photo_url = req.file.url;
