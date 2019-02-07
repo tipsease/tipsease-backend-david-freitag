@@ -7,10 +7,17 @@ router.route('/').post(async (req, res) => {
     const { tipperBoolean, ...creds } = req.body;
 
     if (tipperBoolean) {
-        const { password, ...tipper } = await tippers
-            .getAllInternal()
-            .where({ email: creds.email })
-            .first();
+        try {
+            const { password, ...tipper } = await tippers
+                .getAllInternal()
+                .where({ email: creds.email })
+                .first();
+        } catch (err) {
+            res.status(401).json({
+                errMessage: `Incorrect username or password`,
+            });
+            return;
+        }
         if (password && bcrypt.compareSync(creds.password, password)) {
             const token = genToken(tipper);
             tipper.role = 'tipper';
