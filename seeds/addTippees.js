@@ -22,15 +22,5 @@ exports.seed = async function(knex, Promise) {
         fakeTippees.push(createFakeTippee(i));
     }
 
-    // fakeTippees.push({
-    //     first_name: 'Testy',
-    //     last_name: 'McTesterson',
-    //     start_date: faker.date.past(),
-    //     email: 'testy@test.com',
-    //     tagline: getQuote().text,
-    //     qr_url: 'random url',
-    //     passwd: '',
-    // });
-
     await knex('tippees').insert(fakeTippees);
 };
