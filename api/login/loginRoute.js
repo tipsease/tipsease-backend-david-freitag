@@ -16,6 +16,7 @@ router.route('/').post(async (req, res) => {
             res.status(401).json({
                 errMessage: `Incorrect username or password`,
             });
+            return;
         }
         if (password && bcrypt.compareSync(creds.password, password)) {
             const token = genToken(tipper);
@@ -25,16 +26,24 @@ router.route('/').post(async (req, res) => {
                 token,
                 ...tipper,
             });
+            return;
         } else {
             res.status(401).json({
                 errMessage: 'Incorrect username or password',
             });
         }
     } else {
-        var { password, ...tippee } = await tippees
-            .getAllInternal()
-            .where({ email: creds.email })
-            .first();
+        try {
+            var { password, ...tippee } = await tippees
+                .getAllInternal()
+                .where({ email: creds.email })
+                .first();
+        } catch (err) {
+            res.status(401).json({
+                errMessage: 'Incorrect username or password',
+            });
+            return;
+        }
         if (password && bcrypt.compareSync(creds.password, password)) {
             const token = genToken(tippee);
             tippee.role = 'tippee';
@@ -43,6 +52,7 @@ router.route('/').post(async (req, res) => {
                 token,
                 ...tippee,
             });
+            return;
         } else {
             res.status(401).json({
                 errMessage: 'Incorrect username or password',
