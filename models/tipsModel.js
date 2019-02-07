@@ -9,7 +9,5 @@ exports.insert = data => {
 };
 
 exports.getById = id => {
-    return db('tips')
-        .where('id', id)
-        .select('tipper_id', 'tippee_id', 'amount', 'date');
+    return db('tips').where('id', id);
 };
