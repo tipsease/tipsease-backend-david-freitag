@@ -8,7 +8,7 @@ router.route('/').post(async (req, res) => {
 
     if (tipperBoolean) {
         try {
-            const { password, ...tipper } = await tippers
+            var { password, ...tipper } = await tippers
                 .getAllInternal()
                 .where({ email: creds.email })
                 .first();
@@ -16,7 +16,6 @@ router.route('/').post(async (req, res) => {
             res.status(401).json({
                 errMessage: `Incorrect username or password`,
             });
-            return;
         }
         if (password && bcrypt.compareSync(creds.password, password)) {
             const token = genToken(tipper);
@@ -32,14 +31,13 @@ router.route('/').post(async (req, res) => {
             });
         }
     } else {
-        const { password, ...tippee } = await tippees
+        var { password, ...tippee } = await tippees
             .getAllInternal()
             .where({ email: creds.email })
             .first();
         if (password && bcrypt.compareSync(creds.password, password)) {
             const token = genToken(tippee);
             tippee.role = 'tippee';
-
             res.status(201).json({
                 success: 'You have authenticated',
                 token,
