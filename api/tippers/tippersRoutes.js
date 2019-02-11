@@ -37,10 +37,11 @@ router
                     errMessage: `Tipper ${id} does not exist.`,
                 });
                 return;
+            } else {
+                res.status(200).json({
+                    message: `Tipper ${id} was removed from the database.`,
+                });
             }
-            res.status(200).json({
-                message: `Tipper ${id} was removed from the database.`,
-            });
         } catch (err) {
             res.status(500).json(err);
         }
