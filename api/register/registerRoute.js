@@ -20,7 +20,6 @@ router.route('/').post(imageParser.single('image'), async (req, res) => {
     }
 
     let { tipperBoolean, ...data } = req.body;
-    const image = {};
     const hash = bcrypt.hashSync(data.password, 8);
 
     data.password = hash;
@@ -41,12 +40,6 @@ router.route('/').post(imageParser.single('image'), async (req, res) => {
             res.status(500).json(err);
         }
     } else {
-        if ((!data.start_date, !data.tagline, !data.company_name)) {
-            res.status(400).json({
-                errMessage: `first_name, last_name, email, password, start_date, tagline, company_name and tipperBoolean are required`,
-            });
-            return;
-        }
         let qrCodeImg = {};
         try {
             qrCodeImg = await QRCode.toDataURL(

@@ -12,6 +12,12 @@ const USER = {
     company: [{ required_if: ['tipperBoolean', false] }, 'string'],
 };
 
+const LOGIN = {
+    email: 'required|email',
+    password: 'required',
+    tipperBoolean: 'required|boolean',
+};
+
 const userValidator = data => {
     let output;
     let isValid;
