@@ -1,4 +1,4 @@
-const imageParser = require('../../configs/cloudinary');
+const imageParser = require('../configs/cloudinary');
 
 function addPhotoToObject(req, data) {
     const workingData = Object.assign(data);
