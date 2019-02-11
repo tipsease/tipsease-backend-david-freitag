@@ -1,5 +1,6 @@
 const { tippers } = require('../../models');
 const router = require('express').Router();
+const imageParser = require('../configs/cloudinary');
 const addPhotoToObject = require('../../helpers/photos');
 
 router.route('/').get(async (req, res) => {
